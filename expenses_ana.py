@@ -44,7 +44,8 @@ def find_smallest(expenses):
         amount = expenses[i][3]
         if amount < smallest:
             smallest = amount
-    return smallest
+            details = expenses[i][:3]
+    return f'${smallest} -> {' - '.join(details)}'
 
 
 def find_largest(expenses):
@@ -54,7 +55,8 @@ def find_largest(expenses):
         amount = expenses[i][3]
         if amount > largest:
             largest = amount
-    return largest
+            details = expenses[i][:3]
+    return f'${largest} -> {' - '.join(details)}'
 
 def category_sort(expenses):
     '''Returns a dictionary of category as key and other
@@ -86,12 +88,44 @@ def category_expenses(all_categories):
 
         analysis_dic[category] = category_amount
     return analysis_dic
-    
+
+def count_per_category(all_categories):
+
+    count_dic = {}
+
+    for category, details in all_categories.items():
+        count_dic[category] = len(details)
+
+    return count_dic
+
+def highest_category(analysis_dic):
+
+    highest = max(analysis_dic.values())
+    largest_cat = []
+
+    for category,amount in analysis_dic.items():
+        if amount == highest:
+            largest_cat.append(category)
+    return f'{','.join(largest_cat)}: {highest}'
+
+def lowest_category(analysis_dic):
+
+    smallest = min(analysis_dic.values())
+    smallest_cat = []
+
+    for category,amount in analysis_dic.items():
+        if amount == smallest:
+            smallest_cat.append(category)
+    return f'{','.join(smallest_cat)}: {smallest}'
+
+
+def average_expense_cat(analysis_dic,all_categories):
+    pass
 
 
 def main():
     expenses = read_file('expense.csv')
-    print(expenses)
+    #print(expenses)
 
     total = total_calc(expenses)
     count = count_expenses(expenses)
@@ -100,14 +134,57 @@ def main():
     largest = find_largest(expenses)
     all_categories = category_sort(expenses)
     analysis_dic = category_expenses(all_categories)
-    print(count)
-    print(total)
-    print(average)
-    print(smallest)
-    print(largest)
-    print(all_categories)
-    print(analysis_dic)
-    
+    #print(all_categories)
 
+    view_menu = True
+    
+    menu ="1.Total number of expenses\n2.Find out total amount spent on expenses\n3.Find out average amount spent on expenses\n4.Smallest expense\n5.Largest expense\n6.Category analysis\n7.Exit \n"
+
+    category_menu = "1.Total expenses per category\n2.Expenses count per category\n3.Highest category expens\n4.Lowest category expense\n5.Return to main menu\n"
+
+    while view_menu:
+        print(menu)
+        
+        request = input("Choose an option from the menu: ")
+
+        if request == "1":
+            print(f"Total number of expenses: {count}\n")
+        elif request == "2":
+            print(f"Total amount spent on expenses: {total}\n")
+        elif request == "3":
+            print(f"Average expense amount: {average}\n")
+        elif request == "4":
+            print(f"Smallest expense: {smallest}\n")
+        elif request == "5":
+            print(f"Largest expense: {largest}\n")
+        elif request == "6":
+
+            category_view = True
+
+            while category_view:
+                print(category_menu)
+                
+                category_opt = input("Choose an option from the category menu: \n")
+
+                if category_opt == "1":
+                    print(f"Total expenses for each category: {analysis_dic}\n")
+                elif category_opt == "2":
+                    print(f"{count_per_category(all_categories)}\n")
+                elif category_opt == "3":
+                    print(f'{highest_category(analysis_dic)}\n')
+                elif category_opt == "4":
+                    print(f'{lowest_category(analysis_dic)}\n')
+                elif category_opt == "5":
+                    category_view = False
+                else:
+                    print("Invalid input\n")
+
+
+        elif request == "7":
+            view_menu = False
+        else:
+            print("Invalid input")
+
+    
 if __name__ == '__main__':
     main()
