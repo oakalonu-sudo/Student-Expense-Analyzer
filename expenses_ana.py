@@ -176,14 +176,16 @@ def lowest_month(month_total_dic):
             lowest_month = month
     return f'{lowest_month} - ${lowest}'
 
-def avg_expense_month(month_dic,month_total_dic):
-    '''Returns a dic of key as month and values as average expense'''
+def avg_expense_month(month_dic, month_total_dic):
+    '''Returns a dic of key as month and average expense as values'''
 
     avg_dic = {}
 
     for month,details in month_dic.items():
-        avg_dic[month] = month_total_dic[month]/len(details)
-    return avg_dic            
+        avg_dic[month] = month_total_dic[month] / len(details)
+
+    return avg_dic
+            
 
 def main():
     expenses = read_file('expense.csv')
@@ -207,7 +209,7 @@ def main():
 
     category_menu = "1.Total expenses per category\n2.Expenses count per category\n3.Highest category expense\n4.Lowest category expense\n5.Average expense of categories\n6.Return to main menu\n"
 
-    month_menu = "1.All expenses for each month\n2.Total amount of expenses for each month\n3.Highest spending month\n4.Lowest spending month\n5.Average expense per month\n6.Return to main menu\n"
+    month_menu = "1.All expenses for each month\n2.Total amount of expenses for each month\n3.Highest spending month\n4.Lowest spending month\n5.Average expenses per month\n6.Return to main menu\n"
 
     while view_menu:
         print(menu)
@@ -265,7 +267,7 @@ def main():
                 elif month_opt == "4":
                     print(f'Month with lowest total spending: {lowest_month(month_total_dic)}\n')
                 elif month_opt == "5":
-                    print(f"Average expense per month: {avg_expense_month(month_dic,month_total_dic)}\n")
+                    print(f'Average expenses per month: {avg_expense_month(month_dic,month_total_dic)}\n')
                 elif month_opt == "6":
                     month_view = False
                 else:
