@@ -19,12 +19,14 @@ def read_file(filename):
     return expenses
 
 def count_expenses(expenses):
+    '''Counts number of expenses'''
     count = 0
     for line in expenses:
         count += 1
     return count 
 
 def total_calc(expenses):
+    '''Calculates total expenses'''
 
     total = 0
     for line in expenses:
@@ -32,12 +34,14 @@ def total_calc(expenses):
     return total
 
 def average_calc(total, count):
+    '''Calculates average expense'''
 
     average = total/count
 
     return average
 
 def find_smallest(expenses):
+    '''Finds the smallest expense'''
 
     smallest = expenses[0][3]
     for i in range(1,len(expenses)):
@@ -49,6 +53,7 @@ def find_smallest(expenses):
 
 
 def find_largest(expenses):
+    '''Finds the largest expense'''
 
     largest = expenses[0][3]
     for i in range(1,len(expenses)):
@@ -90,6 +95,7 @@ def category_expenses(all_categories):
     return analysis_dic
 
 def count_per_category(all_categories):
+    '''Returns a dictionary of category as key and number of expenses as values'''
 
     count_dic = {}
 
@@ -99,6 +105,7 @@ def count_per_category(all_categories):
     return count_dic
 
 def highest_category(analysis_dic):
+    '''Returns the category with the highest total expense'''
 
     highest = max(analysis_dic.values())
     largest_cat = []
@@ -109,7 +116,7 @@ def highest_category(analysis_dic):
     return f'{','.join(largest_cat)}: {highest: .2f}'
 
 def lowest_category(analysis_dic):
-
+    '''Returns the category with the lowest total expense'''
     smallest = min(analysis_dic.values())
     smallest_cat = []
 
@@ -147,6 +154,7 @@ def month_sort(expenses):
     return month_dic
 
 def month_total(month_dic):
+    '''Returns a dictionary of each month and its total expenses'''
 
     month_total_dic = {}
 
@@ -159,6 +167,7 @@ def month_total(month_dic):
     return month_total_dic
 
 def highest_month(month_total_dic):
+    '''Returns the month with the highest total expenses'''
 
     highest = max(month_total_dic.values())
     
@@ -168,6 +177,7 @@ def highest_month(month_total_dic):
     return f'{highest_month} - ${highest}'
 
 def lowest_month(month_total_dic):
+    '''Returns the month with the lowest total expenses'''
 
     lowest = min(month_total_dic.values())
 
@@ -211,6 +221,7 @@ def main():
 
     month_menu = "1.All expenses for each month\n2.Total amount of expenses for each month\n3.Highest spending month\n4.Lowest spending month\n5.Average expenses per month\n6.Return to main menu\n"
 
+    #Show the main menu
     while view_menu:
         print(menu)
         
@@ -228,6 +239,7 @@ def main():
             print(f"Largest expense: {largest}\n")
         elif request == "6":
 
+            #Show the category menu
             category_view = True
 
             while category_view:
@@ -251,6 +263,8 @@ def main():
                     print("Invalid input\n")
 
         elif request == "7":
+
+            #Show the month menu
             month_view = True
 
             while month_view:
