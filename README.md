@@ -10,11 +10,11 @@ Access processed expense data through a Flask API
 
 
 Technologies:
-Python
-pandas
-Matplotlib
-scikit-learn
-Flask
+Python,
+pandas,
+Matplotlib,
+scikit-learn,
+Flask,
 
 
 Project Status
